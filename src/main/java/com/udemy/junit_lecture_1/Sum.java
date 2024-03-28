@@ -1,8 +1,8 @@
 package com.udemy.junit_lecture_1;
 
 public class Sum implements Expression {
-    Expression augend;
-    Expression addend;
+    final Expression augend;
+    final Expression addend;
 
     public Sum(Expression augend, Expression addend) {
         this.augend = augend;

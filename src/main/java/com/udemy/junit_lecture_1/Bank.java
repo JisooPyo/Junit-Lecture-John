@@ -2,8 +2,8 @@ package com.udemy.junit_lecture_1;
 
 import java.util.HashMap;
 
-public class Bank {
-    private HashMap<Pair, Integer> rateMap = new HashMap<>();
+class Bank {
+    private final HashMap<Pair, Integer> rateMap = new HashMap<>();
 
     Money reduce(Expression source, String toCurrency) {
         return source.reduce(this, toCurrency);

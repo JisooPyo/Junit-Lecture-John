@@ -4,7 +4,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
 
-public class MoneyTest {
+class MoneyTest {
     @Test
     void testMultiplication() {
         Money fiveD = Money.dollar(5);
