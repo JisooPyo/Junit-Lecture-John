@@ -2,9 +2,13 @@
 
 Udemy - John Thompson의 <*Testing Spring Boot: Beginner to Guru*> 강의 학습 코드입니다.
 
+강의에서는 `Maven`을 build tool로 사용하고 있지만, 저는 `Gradle`을 사용하였습니다.
+
 <br>
 
 This code is for the <*Testing Spring Boot: Beginner to Guru*> course by John Thompson on Udemy.
+
+In this lecture, `Maven` was used as the build tool, but I used `Gradle` instead.
 
 ## 강의 링크
 

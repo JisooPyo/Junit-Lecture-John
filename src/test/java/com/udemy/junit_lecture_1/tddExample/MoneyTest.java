@@ -1,8 +1,13 @@
-package com.udemy.junit_lecture_1;
+package com.udemy.junit_lecture_1.tddExample;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
+
+import com.udemy.junit_lecture_1.tddExample.Bank;
+import com.udemy.junit_lecture_1.tddExample.Expression;
+import com.udemy.junit_lecture_1.tddExample.Money;
+import com.udemy.junit_lecture_1.tddExample.Sum;
 
 class MoneyTest {
     @Test

@@ -1,4 +1,4 @@
-package com.udemy.junit_lecture_1;
+package com.udemy.junit_lecture_1.tddExample;
 
 public interface Expression {
     Money reduce(Bank bank, String to);
