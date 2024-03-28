@@ -1,6 +1,6 @@
 package com.udemy.junit_lecture_1.junit;
 
-public class Greating {
+public class Greeting {
     private static final String HELLO = "Hello";
     private static final String WORLD = "World";
 
