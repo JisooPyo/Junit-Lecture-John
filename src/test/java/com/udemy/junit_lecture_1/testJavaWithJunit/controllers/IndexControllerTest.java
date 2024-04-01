@@ -1,5 +1,6 @@
 package com.udemy.junit_lecture_1.testJavaWithJunit.controllers;
 
+import static org.assertj.core.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assumptions.*;
 
@@ -34,6 +35,9 @@ class IndexControllerTest {
         assertEquals("index", controller.index(),
             () -> "Another Expensive Message "
                 + "Make me only if you have to");
+
+        // AssertJ 라이브러리
+        assertThat(controller.index()).isEqualTo("index");
     }
 
     @Test
