@@ -1,4 +1,4 @@
-package com.udemy.junit_lecture_1.junit;
+package com.udemy.junit_lecture_1.startJunit;
 
 public class Greeting {
     private static final String HELLO = "Hello";

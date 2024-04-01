@@ -1,4 +1,4 @@
-package com.udemy.junit_lecture_1.junit;
+package com.udemy.junit_lecture_1.startJunit;
 
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
