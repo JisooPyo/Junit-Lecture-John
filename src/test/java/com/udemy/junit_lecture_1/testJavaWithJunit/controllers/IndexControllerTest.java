@@ -2,7 +2,10 @@ package com.udemy.junit_lecture_1.testJavaWithJunit.controllers;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.time.Duration;
+
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -33,6 +36,31 @@ class IndexControllerTest {
     void oopsHandler() {
         assertThrows(ValueNotFoundException.class, () -> {
             controller.oopsHandler();
+        });
+    }
+
+    @Disabled("Demo of Timeout")
+    @Test
+    void testTimeOut() {
+        // 일단 다 실행시킨 후 실행 시간이 100ms를 초과하면 error 발생
+        // 콘솔에 "I got here"가 출력됨
+        // 실행은 단일 스레드에서 진행됨
+        assertTimeout(Duration.ofMillis(100), () -> {
+            Thread.sleep(2000);
+
+            System.out.println("I got here");
+        });
+    }
+
+    @Disabled("Demo of Timeout")
+    @Test
+    void testTimeOutPreempt() {
+        // 100ms가 되면 stop -> error 발생
+        // 콘솔에 "I got here 234234234"가 출력되지 않음.
+        assertTimeoutPreemptively(Duration.ofMillis(100), () -> {
+            Thread.sleep(2000);
+
+            System.out.println("I got here 234234234");
         });
     }
 }
