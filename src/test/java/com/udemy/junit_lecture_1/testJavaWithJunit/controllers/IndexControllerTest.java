@@ -1,6 +1,7 @@
 package com.udemy.junit_lecture_1.testJavaWithJunit.controllers;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assumptions.*;
 
 import java.time.Duration;
 
@@ -62,5 +63,17 @@ class IndexControllerTest {
 
             System.out.println("I got here 234234234");
         });
+    }
+
+    // Assumption: 테스트 실패시 결과가 "실패된" 상태가 되지 않고 "무시된" 상태가 된다.
+    @Test
+    void testAssumptionTrue() {
+        // equalsIgnoreCase : 대소문자를 구분하지 않고 같은지 확인한다.
+        assumeTrue("GURU".equalsIgnoreCase(System.getenv("GURU_RUNTIME")));
+    }
+
+    @Test
+    void testAssumptionTrueAssumptionIsTrue() {
+        assumeTrue("GURU".equalsIgnoreCase("GURU"));
     }
 }
