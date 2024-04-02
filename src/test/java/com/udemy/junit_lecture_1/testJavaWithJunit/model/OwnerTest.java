@@ -4,11 +4,11 @@ import static org.hamcrest.MatcherAssert.*;
 import static org.hamcrest.Matchers.*;
 import static org.junit.jupiter.api.Assertions.*;
 
-import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
-@Tag("model")
-class OwnerTest {
+import com.udemy.junit_lecture_1.testJavaWithJunit.ModelTests;
+
+class OwnerTest implements ModelTests {
     @Test
     void dependentAssertions() {
         Owner owner = new Owner(1L, "Joe", "Buck");

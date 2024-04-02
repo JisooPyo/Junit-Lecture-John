@@ -2,12 +2,12 @@ package com.udemy.junit_lecture_1.testJavaWithJunit.model;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
+import com.udemy.junit_lecture_1.testJavaWithJunit.ModelTests;
+
 // Edit configurations -> Add New Configuration -> JUnit -> 명명하기(ex. Model Tests) -> Tags : model 입력 -> run
-@Tag("model")
-class PersonTest {
+class PersonTest implements ModelTests {
     @Test
     void groupedAssertions() {
         // given
