@@ -4,7 +4,9 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.RepeatedTest;
+import org.junit.jupiter.api.RepetitionInfo;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInfo;
 
 import com.udemy.junit_lecture_1.testJavaWithJunit.ModelTests;
 
@@ -39,5 +41,10 @@ class PersonTest implements ModelTests {
     @DisplayName("My Repeated Test")
     void myRepeatedTest() {
         // TODO - impl
+    }
+
+    @RepeatedTest(5)
+    void myRepeatedTestWithDI(TestInfo testInfo, RepetitionInfo repetitionInfo) {
+        System.out.println(testInfo.getDisplayName() + ": " + repetitionInfo.getCurrentRepetition());
     }
 }
