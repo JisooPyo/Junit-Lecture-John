@@ -1,6 +1,7 @@
 package com.udemy.junit_lecture_1.testJavaWithJunit.services.springdatajpa;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.*;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -24,6 +25,34 @@ class SpecialitySDJpaServiceTest {
     @Test
     void deleteById() {
         service.deleteById(1L);
+        service.deleteById(1L);
+
+        verify(specialtyRepository, times(2)).deleteById(1L);
+    }
+
+    @Test
+    void deleteByIdAAtLeast() {
+        service.deleteById(1L);
+        service.deleteById(1L);
+
+        verify(specialtyRepository, atLeastOnce()).deleteById(1L);
+    }
+
+    @Test
+    void deleteByIdAAtMost() {
+        service.deleteById(1L);
+        service.deleteById(1L);
+
+        verify(specialtyRepository, atMost(5)).deleteById(1L);
+    }
+
+    @Test
+    void deleteByIdNever() {
+        service.deleteById(1L);
+        service.deleteById(1L);
+
+        verify(specialtyRepository, atLeastOnce()).deleteById(1L);
+        verify(specialtyRepository, never()).deleteById(5L);
     }
 
     @Test
