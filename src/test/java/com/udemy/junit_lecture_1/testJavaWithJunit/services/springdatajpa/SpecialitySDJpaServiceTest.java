@@ -1,7 +1,10 @@
 package com.udemy.junit_lecture_1.testJavaWithJunit.services.springdatajpa;
 
+import static org.assertj.core.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
+
+import java.util.Optional;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -21,6 +24,19 @@ class SpecialitySDJpaServiceTest {
     // 테스트 대상 객체에 Mock을 주입하기 위해 사용된다.
     @InjectMocks
     SpecialitySDJpaService service;
+
+    @Test
+    void findByIdTest() {
+        Speciality speciality = new Speciality();
+
+        when(specialtyRepository.findById(1L)).thenReturn(Optional.of(speciality));
+
+        Speciality foundSpecialty = service.findById(1L);
+
+        assertThat(foundSpecialty).isNotNull();
+
+        verify(specialtyRepository, times(1)).findById(1L);
+    }
 
     @Test
     void deleteById() {
