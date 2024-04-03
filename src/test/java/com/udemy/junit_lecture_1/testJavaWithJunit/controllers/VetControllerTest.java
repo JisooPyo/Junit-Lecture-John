@@ -7,6 +7,7 @@ import java.util.Set;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import com.udemy.junit_lecture_1.testJavaWithJunit.ControllerTests;
 import com.udemy.junit_lecture_1.testJavaWithJunit.fauxspring.Model;
 import com.udemy.junit_lecture_1.testJavaWithJunit.fauxspring.ModelMapImpl;
 import com.udemy.junit_lecture_1.testJavaWithJunit.model.Vet;
@@ -15,7 +16,7 @@ import com.udemy.junit_lecture_1.testJavaWithJunit.services.VetService;
 import com.udemy.junit_lecture_1.testJavaWithJunit.services.map.SpecialityMapService;
 import com.udemy.junit_lecture_1.testJavaWithJunit.services.map.VetMapService;
 
-class VetControllerTest {
+class VetControllerTest implements ControllerTests {
     VetService vetService;
     SpecialtyService specialtyService;
     VetController vetController;

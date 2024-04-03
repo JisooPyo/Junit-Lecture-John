@@ -15,7 +15,9 @@ import org.junit.jupiter.api.condition.EnabledOnOs;
 import org.junit.jupiter.api.condition.JRE;
 import org.junit.jupiter.api.condition.OS;
 
-class IndexControllerTest {
+import com.udemy.junit_lecture_1.testJavaWithJunit.ControllerTests;
+
+class IndexControllerTest implements ControllerTests {
     IndexController controller;
 
     @BeforeEach
