@@ -19,3 +19,4 @@ In this lecture, `Maven` was used as the build tool, but I used `Gradle` instead
 <img src="https://img.shields.io/badge/Java-007396?style=flat-square&logo=OpenJDK&logoColor=white">&nbsp;
 <img src="https://img.shields.io/badge/Spring Boot 3-6DB33F?style=flat-square&logo=springboot&logoColor=white">&nbsp;
 <img src="https://img.shields.io/badge/Junit5-25A162?style=flat-square&logo=junit5&logoColor=white">&nbsp;
+<img src="https://img.shields.io/badge/Gradle-02303A?style=flat-square&logo=gradle&logoColor=white">&nbsp;
