@@ -5,6 +5,8 @@ import static org.hamcrest.Matchers.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import com.udemy.junit_lecture_1.testJavaWithJunit.ModelTests;
 
@@ -26,5 +28,12 @@ class OwnerTest implements ModelTests {
 
         // Hamcrest 라이브러리
         assertThat(owner.getCity(), is("Key West"));
+    }
+
+    @ParameterizedTest
+    // short, byte, int, long, float, double, char, boolean, String, Class
+    @ValueSource(strings = {"Spring", "Framework", "Guru"})
+    void testValueSource(String val) {
+        System.out.println(val);
     }
 }
