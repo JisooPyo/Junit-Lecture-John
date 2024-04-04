@@ -1,8 +1,7 @@
 package com.udemy.junit_lecture_1.testJavaWithJunit.services.springdatajpa;
 
 import static org.assertj.core.api.Assertions.*;
-import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.*;
+import static org.mockito.BDDMockito.*;
 
 import java.util.Optional;
 
@@ -47,6 +46,19 @@ class SpecialitySDJpaServiceTest {
         // any...() -> anyLong, anyBoolean, ...
         // verify(specialtyRepository, times(1)).findById(anyLong());
         verify(specialtyRepository, times(1)).findById(1L);
+    }
+
+    @Test
+    void findByIdBddTest() {
+        Speciality speciality = new Speciality();
+
+        given(specialtyRepository.findById(1L)).willReturn(Optional.of(speciality));
+
+        Speciality foundSpecialty = service.findById(1L);
+
+        assertThat(foundSpecialty).isNotNull();
+
+        verify(specialtyRepository).findById(anyLong());
     }
 
     @Test
