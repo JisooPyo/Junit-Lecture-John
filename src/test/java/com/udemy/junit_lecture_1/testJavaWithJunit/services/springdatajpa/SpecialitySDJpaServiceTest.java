@@ -52,13 +52,16 @@ class SpecialitySDJpaServiceTest {
     void findByIdBddTest() {
         Speciality speciality = new Speciality();
 
+        // given
         given(specialtyRepository.findById(1L)).willReturn(Optional.of(speciality));
 
+        // when
         Speciality foundSpecialty = service.findById(1L);
 
+        // then
         assertThat(foundSpecialty).isNotNull();
-
-        verify(specialtyRepository).findById(anyLong());
+        then(specialtyRepository).should().findById(anyLong());     // default: should(times(1))
+        then(specialtyRepository).shouldHaveNoMoreInteractions();
     }
 
     @Test
