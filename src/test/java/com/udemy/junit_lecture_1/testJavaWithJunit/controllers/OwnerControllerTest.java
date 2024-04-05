@@ -12,9 +12,9 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Captor;
+import org.mockito.InOrder;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.mockito.junit.jupiter.MockitoSettings;
 import org.mockito.quality.Strictness;
@@ -32,6 +32,8 @@ class OwnerControllerTest {
 
     @Mock
     OwnerService ownerService;
+    @Mock
+    Model model;
     @Mock
     BindingResult bindingResult;
     @InjectMocks
@@ -68,13 +70,20 @@ class OwnerControllerTest {
     void processFindFormWildCardFound() {
         // given
         Owner owner = new Owner(1L, "Joe", "FindMe");
+        // 메서드 호출의 순서를 검증
+        InOrder inOrder = inOrder(ownerService, model);
 
         // when
-        String viewName = controller.processFindForm(owner, bindingResult, Mockito.mock(Model.class));
+        String viewName = controller.processFindForm(owner, bindingResult, model);
 
         // then
         assertThat(stringArgumentCaptor.getValue()).isEqualTo("%FindMe%");
         assertThat("owners/ownersList").isEqualTo(viewName);
+
+        // inorder asserts - 순서는 inOrder() 메서드 인자 순이 아니라 verify 순으로 결정
+        // 아래 두 코드가 위치가 반대로 되어 있으면 에러가 난다.
+        inOrder.verify(ownerService).findAllByLastNameLike(anyString());
+        inOrder.verify(model).addAttribute(anyString(), anyList());
     }
 
     @Test
