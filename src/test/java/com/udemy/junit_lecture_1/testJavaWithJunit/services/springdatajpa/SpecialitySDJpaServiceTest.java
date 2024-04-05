@@ -22,7 +22,7 @@ import com.udemy.junit_lecture_1.testJavaWithJunit.repositories.SpecialtyReposit
 @MockitoSettings(strictness = Strictness.LENIENT)   // Stub 코드 작성 시 예외를 발생시키지 않는다.
 class SpecialitySDJpaServiceTest {
     // 의존하는 객체를 대체하기 위해 사용된다.
-    @Mock()
+    @Mock
     SpecialtyRepository specialtyRepository;
 
     // 테스트 대상 객체에 Mock을 주입하기 위해 사용된다.
