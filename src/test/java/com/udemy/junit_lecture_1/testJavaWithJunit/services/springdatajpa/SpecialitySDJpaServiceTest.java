@@ -11,14 +11,18 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.mockito.junit.jupiter.MockitoSettings;
+import org.mockito.quality.Strictness;
 
 import com.udemy.junit_lecture_1.testJavaWithJunit.model.Speciality;
 import com.udemy.junit_lecture_1.testJavaWithJunit.repositories.SpecialtyRepository;
 
 @ExtendWith(MockitoExtension.class)
+// testSaveLambdaNoMatch()의 stub 코드 때문에 추가한 설정
+@MockitoSettings(strictness = Strictness.LENIENT)   // Stub 코드 작성 시 예외를 발생시키지 않는다.
 class SpecialitySDJpaServiceTest {
     // 의존하는 객체를 대체하기 위해 사용된다.
-    @Mock
+    @Mock()
     SpecialtyRepository specialtyRepository;
 
     // 테스트 대상 객체에 Mock을 주입하기 위해 사용된다.
@@ -132,5 +136,53 @@ class SpecialitySDJpaServiceTest {
         assertThrows(RuntimeException.class, () -> specialtyRepository.delete(new Speciality()));
 
         then(specialtyRepository).should().delete(any());
+    }
+
+    @Test
+    void testSaveLambda() {
+        // given
+        final String MATCH_ME = "MATCH_ME";
+        Speciality speciality = new Speciality();
+        speciality.setDescription(MATCH_ME);
+
+        Speciality savedSpeciality = new Speciality();
+        savedSpeciality.setId(1L);
+
+        // need mock to only return on match MATCH_ME string
+        given(
+            specialtyRepository.save(
+                argThat(argument -> argument.getDescription().equals(MATCH_ME))
+            )
+        ).willReturn(savedSpeciality);
+
+        // when
+        Speciality returnedSpeciality = service.save(speciality);
+
+        // then
+        assertThat(returnedSpeciality.getId()).isEqualTo(1L);
+    }
+
+    @Test
+    void testSaveLambdaNoMatch() {
+        // given
+        final String MATCH_ME = "MATCH_ME";
+        Speciality speciality = new Speciality();
+        speciality.setDescription("Not a match");
+
+        Speciality savedSpeciality = new Speciality();
+        savedSpeciality.setId(1L);
+
+        // need mock to only return on match MATCH_ME string
+        given(
+            specialtyRepository.save(
+                argThat(argument -> argument.getDescription().equals(MATCH_ME))
+            )
+        ).willReturn(savedSpeciality);
+
+        // when
+        Speciality returnedSpeciality = service.save(speciality);
+
+        // then
+        assertNull(returnedSpeciality);
     }
 }
