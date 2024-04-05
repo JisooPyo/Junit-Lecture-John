@@ -53,7 +53,7 @@ class SpecialitySDJpaServiceTest {
 
         // then
         assertThat(foundSpecialty).isNotNull();
-        then(specialtyRepository).should().findById(anyLong());     // default: should(times(1))
+        then(specialtyRepository).should(timeout(100)).findById(anyLong());     // default: should(times(1))
         then(specialtyRepository).shouldHaveNoMoreInteractions();
     }
 
@@ -66,7 +66,7 @@ class SpecialitySDJpaServiceTest {
         service.deleteById(1L);
 
         // then
-        then(specialtyRepository).should(times(2)).deleteById(1L);
+        then(specialtyRepository).should(timeout(100).times(2)).deleteById(1L);
     }
 
     @Test
@@ -78,7 +78,7 @@ class SpecialitySDJpaServiceTest {
         service.deleteById(1L);
 
         // then
-        then(specialtyRepository).should(atLeastOnce()).deleteById(1L);
+        then(specialtyRepository).should(timeout(1000).atLeastOnce()).deleteById(1L);
     }
 
     @Test
@@ -88,6 +88,7 @@ class SpecialitySDJpaServiceTest {
         service.deleteById(1L);
 
         // then
+        // timeout()은 atMost()를 지원하지 않는다.
         then(specialtyRepository).should(atMost(5)).deleteById(1L);
     }
 
@@ -98,7 +99,7 @@ class SpecialitySDJpaServiceTest {
         service.deleteById(1L);
 
         // then
-        then(specialtyRepository).should(atLeastOnce()).deleteById(1L);
+        then(specialtyRepository).should(timeout(200).atLeastOnce()).deleteById(1L);
         then(specialtyRepository).should(never()).deleteById(5L);
     }
 
