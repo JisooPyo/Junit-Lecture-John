@@ -83,7 +83,8 @@ class OwnerControllerTest {
         // inorder asserts - 순서는 inOrder() 메서드 인자 순이 아니라 verify 순으로 결정
         // 아래 두 코드가 위치가 반대로 되어 있으면 에러가 난다.
         inOrder.verify(ownerService).findAllByLastNameLike(anyString());
-        inOrder.verify(model).addAttribute(anyString(), anyList());
+        inOrder.verify(model, times(1)).addAttribute(anyString(), anyList());
+        verifyNoMoreInteractions(model);
     }
 
     @Test
@@ -97,6 +98,7 @@ class OwnerControllerTest {
         // then
         assertThat(stringArgumentCaptor.getValue()).isEqualTo("%Brown%");
         assertThat("redirect:/owners/1").isEqualTo(viewName);
+        verifyNoInteractions(model);
     }
 
     @Test
@@ -110,6 +112,7 @@ class OwnerControllerTest {
         // then
         assertThat(stringArgumentCaptor.getValue()).isEqualTo("%DontFindMe%");
         assertThat("owners/findOwners").isEqualTo(viewName);
+        verifyNoInteractions(model);
     }
 
     @Test
