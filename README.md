@@ -10,9 +10,13 @@ This code is for the <*Testing Spring Boot: Beginner to Guru*> course by John Th
 
 In this lecture, `Maven` was used as the build tool, but I used `Gradle` instead.
 
+<br>
+
 ## 강의 링크
 
 [강의 링크(Link to the course)](https://www.udemy.com/course/testing-spring-boot-beginner-to-guru)
+
+<br>
 
 ## Tech Stack
 
