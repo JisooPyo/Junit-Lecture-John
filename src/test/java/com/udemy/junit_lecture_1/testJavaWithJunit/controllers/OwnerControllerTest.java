@@ -4,9 +4,13 @@ import static org.assertj.core.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.BDDMockito.*;
 
-import org.junit.jupiter.api.BeforeEach;
+import java.util.ArrayList;
+import java.util.List;
+
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.ArgumentCaptor;
+import org.mockito.Captor;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
@@ -27,16 +31,44 @@ class OwnerControllerTest {
     @InjectMocks
     OwnerController controller;
 
-    Owner owner;
+    @Captor
+    ArgumentCaptor<String> stringArgumentCaptor;
 
-    @BeforeEach
-    void setUp() {
-        owner = new Owner(5L, "Ember", "Brown");
+    @Test
+    void processFindFormWildCardStringAnnotation() {
+        // given
+        Owner owner = new Owner(5L, "Joe", "Brown");
+        List<Owner> ownerList = new ArrayList<>();
+        // 메서드 호출에 사용되는 인자에 대해 검증하고 싶을 때(이 경우, String 인자)
+        given(ownerService.findAllByLastNameLike(stringArgumentCaptor.capture())).willReturn(ownerList);
+
+        // when
+        String viewName = controller.processFindForm(owner, bindingResult, null);
+
+        // then
+        assertThat(stringArgumentCaptor.getValue()).isEqualTo("%Brown%");
+    }
+
+    @Test
+    void processFindFormWildCardString() {
+        // given
+        Owner owner = new Owner(5L, "Joe", "Brown");
+        List<Owner> ownerList = new ArrayList<>();
+        // 메서드 호출에 사용되는 인자에 대해 검증하고 싶을 때(이 경우, String 인자)
+        final ArgumentCaptor<String> captor = ArgumentCaptor.forClass(String.class);
+        given(ownerService.findAllByLastNameLike(captor.capture())).willReturn(ownerList);
+
+        // when
+        String viewName = controller.processFindForm(owner, bindingResult, null);
+
+        // then
+        assertThat(captor.getValue()).isEqualTo("%Brown%");
     }
 
     @Test
     void processCreationFormHasErrors() {
         // given
+        Owner owner = new Owner(5L, "Ember", "Brown");
         given(bindingResult.hasErrors()).willReturn(true);
 
         // when
@@ -50,6 +82,7 @@ class OwnerControllerTest {
     @Test
     void processCreationFormNoErrors() {
         // given
+        Owner owner = new Owner(5L, "Ember", "Brown");
         given(bindingResult.hasErrors()).willReturn(false);
         given(ownerService.save(owner)).willReturn(owner);
 
