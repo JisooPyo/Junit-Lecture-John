@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 
 @SpringJUnitConfig(classes = {BaseConfig.class, LaurelConfig.class})
-class HearingInterpreterTest {
+class HearingInterpreterLaurelTest {
 
     @Autowired
     HearingInterpreter hearingInterpreter;
