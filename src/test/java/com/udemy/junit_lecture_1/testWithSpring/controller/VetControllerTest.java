@@ -3,6 +3,8 @@ package com.udemy.junit_lecture_1.testWithSpring.controller;
 import static org.assertj.core.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.BDDMockito.*;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,6 +16,8 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import com.udemy.junit_lecture_1.testWithSpring.model.Vet;
 import com.udemy.junit_lecture_1.testWithSpring.model.Vets;
@@ -21,7 +25,6 @@ import com.udemy.junit_lecture_1.testWithSpring.service.ClinicService;
 
 @ExtendWith(MockitoExtension.class)
 class VetControllerTest {
-
     @Mock
     ClinicService clinicService;
     @Mock
@@ -30,6 +33,7 @@ class VetControllerTest {
     VetController controller;
 
     List<Vet> foundVets = new ArrayList<>();
+    MockMvc mockMvc;        // HTTP 요청을 시뮬레이션할 수 있다.
 
     @BeforeEach
     void setUp() {
@@ -39,6 +43,16 @@ class VetControllerTest {
 
         // given
         given(clinicService.findVets()).willReturn(foundVets);
+
+        mockMvc = MockMvcBuilders.standaloneSetup(controller).build();
+    }
+
+    @Test
+    void testControllerShowVetList() throws Exception {
+        mockMvc.perform(get("/vets.html"))
+            .andExpect(status().isOk())
+            .andExpect(model().attributeExists("vets"))
+            .andExpect(view().name("vets/vetList"));
     }
 
     @Test
