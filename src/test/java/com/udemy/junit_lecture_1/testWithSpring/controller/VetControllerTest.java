@@ -33,7 +33,7 @@ class VetControllerTest {
     VetController controller;
 
     List<Vet> foundVets = new ArrayList<>();
-    MockMvc mockMvc;
+    MockMvc mockMvc;        // HTTP 요청을 시뮬레이션할 수 있다.
 
     @BeforeEach
     void setUp() {
