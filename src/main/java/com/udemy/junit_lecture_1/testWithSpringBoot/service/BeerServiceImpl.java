@@ -24,13 +24,13 @@ public class BeerServiceImpl implements BeerService {
 
         List<Beer> beerList;
 
-        if (!beerName.isEmpty() && !beerStyle.name().isEmpty()) {
+        if (beerName != null && beerStyle != null) {
             //search both
             beerList = beerRepository.findAllByBeerNameAndBeerStyle(beerName, beerStyle);
-        } else if (!beerName.isEmpty()) {
+        } else if (beerName != null) {
             //search beer name
             beerList = beerRepository.findAllByBeerName(beerName);
-        } else if (!beerStyle.name().isEmpty()) {
+        } else if (beerStyle != null) {
             //search beer style
             beerList = beerRepository.findAllByBeerStyle(beerStyle);
         } else {
